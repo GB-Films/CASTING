@@ -1,0 +1,39 @@
+# Sistema operativo y archivos temporales
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archivos locales del proyecto y del paquete original
+*.zip
+
+# Dependencias, cachés y salidas de herramientas
+node_modules/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+dist/
+build/
+out/
+coverage/
+*.log
+
+# Configuración local y secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Configuración de editores
+.idea/
+.vscode/
+

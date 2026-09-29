@@ -1,0 +1,35 @@
+CASTING PARA SER MUJER — VERSIÓN 2.1 MOBILE
+Producido por @granbertafilms y dirigido por @byanitaserrano
+
+Abrí index.html en tu navegador para jugar. Todo está integrado en ese único
+archivo: imágenes, logo, stickers, música y efectos. No requiere conexión.
+
+CONTROLES
+A / D o flechas: moverse y orientar la escopeta.
+J / Z o clic izquierdo sostenido: disparar.
+Espacio / W: saltar.
+Shift / K: esquivar.
+R: recargar. También recarga al vaciarse.
+Esc / P: pausa. M: sonido. F: pantalla completa cuando esté disponible.
+En celular: controles táctiles; horizontal recomendado.
+El apuntado sigue siendo manual, sin autoaim.
+
+VERSIÓN 2.1 MOBILE
+Controles táctiles más grandes y acomodados para jugar con ambos pulgares.
+Al tocar ¡ACCIÓN! en celular intenta abrir pantalla completa y horizontal.
+El distintivo flotante de Netlify queda oculto para que no tape los botones.
+
+VERSIÓN 2.0
+Título amarillo y créditos actualizados. El comentarista es el castinero;
+la dirección del rodaje es de la directora. Nuevos comentarios y reacciones.
+Protagonista con jean azul y manos descubiertas. Logo original de GB Films,
+los dos stickers y esqueletos de utilería integrados a la escenografía.
+Oleadas de 12, 18 y 24 enemigos, mayor velocidad y presión de ambos lados.
+El jefe final entra enmascarado, se quita la máscara y revela su nuevo rostro.
+Tras la presentación empieza el combate, que acelera en su segunda fase.
+Se mantienen las tres dificultades, las mejoras y el reinicio por toma.
+
+PARA PUBLICAR
+El archivo index.html debe quedar en la raíz del sitio, reemplazando el
+HTML anterior. No hacen falta carpetas de recursos ni bibliotecas externas.
+La vista previa del HTML anterior no se actualiza por sí sola: abrí la versión nueva.
