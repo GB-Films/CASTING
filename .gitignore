@@ -22,6 +22,9 @@ dist/
 build/
 out/
 coverage/
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
 *.log
 
 # Configuración local y secretos
@@ -32,8 +35,9 @@ coverage/
 *.key
 *.p12
 *.pfx
+*service-account*.json
+*-firebase-adminsdk-*.json
 
 # Configuración de editores
 .idea/
 .vscode/
-

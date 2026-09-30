@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  function signedIn() { return request.auth != null; }
+  function integerBetween(value, lo, hi) { return value is int && value >= lo && value <= hi; }
+  match /matches/{matchId} {
+   // Public leaderboard queries must be bounded. No unrestricted collection reads.
+   allow list: if request.query.limit != null && request.query.limit <= 50;
+   // Owners can check a stable ID before retrying a submission.
+   allow get: if signedIn() && (!exists(/databases/$(database)/documents/matches/$(matchId)) || resource.data.playerId == request.auth.uid);
+   allow create: if signedIn()
+    && request.resource.data.keys().hasAll(['id','runId','playerId','playerName','difficulty','score','durationSeconds','kills','attempt','room','outcome','endedAt','createdAt','gameVersion'])
+    && request.resource.data.keys().hasOnly(['id','runId','playerId','playerName','difficulty','score','durationSeconds','kills','attempt','room','outcome','endedAt','createdAt','gameVersion'])
+    && matchId.matches('^[a-f0-9-]{32,36}$')
+    && request.resource.data.id == matchId
+    && request.resource.data.runId is string
+    && request.resource.data.runId.matches('^[a-f0-9-]{32,36}$')
+    && request.resource.data.playerId == request.auth.uid
+    && request.resource.data.playerName is string
+    && request.resource.data.playerName.size() >= 3
+    && request.resource.data.playerName.size() <= 24
+    && request.resource.data.playerName.matches("^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ._'-]+$")
+    && request.resource.data.playerName.matches('.*[A-Za-zÀ-ÖØ-öø-ÿ0-9].*')
+    && request.resource.data.difficulty in ['easy','normal','hard']
+    && request.resource.data.outcome in ['won','lost','abandoned']
+    && integerBetween(request.resource.data.score, 0, 10000000)
+    && integerBetween(request.resource.data.durationSeconds, 0, 604800)
+    && integerBetween(request.resource.data.kills, 0, 100000)
+    && integerBetween(request.resource.data.attempt, 0, 100000)
+    && integerBetween(request.resource.data.room, 1, 4)
+    && integerBetween(request.resource.data.endedAt, 1, request.time.toMillis() + 86400000)
+    && request.resource.data.createdAt == request.time
+    && request.resource.data.gameVersion == '2.2.0';
+   allow update, delete: if false;
+  }
+ }
+}

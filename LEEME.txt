@@ -1,8 +1,19 @@
 CASTING PARA SER MUJER — VERSIÓN 2.1 MOBILE
 Producido por @granbertafilms y dirigido por @byanitaserrano
 
-Abrí index.html en tu navegador para jugar. Todo está integrado en ese único
-archivo: imágenes, logo, stickers, música y efectos. No requiere conexión.
+Abrí index.html en tu navegador para jugar. Imágenes, logo, stickers, música
+y efectos siguen integrados en el HTML. El juego funciona sin conexión;
+el ranking global requiere Internet y la configuración de Firebase.
+Conservá junto al HTML firebase-config.js, rankings-core.js, rankings.js
+y rankings.css, que agregan el nombre obligatorio y el ranking de partidas.
+
+VERSIÓN 2.2 — RANKING
+Antes de empezar, ingresá un nombre o apodo de 3 a 24 caracteres.
+Tu nombre y puntaje aparecen en el ranking público, separado por dificultad.
+Se registra cada victoria, derrota y abandono usando VOLVER AL CASTING.
+Repetir una toma genera otro registro y conserva las reglas de puntaje del juego.
+Sin conexión, las partidas quedan pendientes en este dispositivo y se envían
+al volver a tener Internet. Ver FIREBASE.md para activar la base de datos.
 
 CONTROLES
 A / D o flechas: moverse y orientar la escopeta.
@@ -30,6 +41,7 @@ Tras la presentación empieza el combate, que acelera en su segunda fase.
 Se mantienen las tres dificultades, las mejoras y el reinicio por toma.
 
 PARA PUBLICAR
-El archivo index.html debe quedar en la raíz del sitio, reemplazando el
-HTML anterior. No hacen falta carpetas de recursos ni bibliotecas externas.
+El archivo index.html debe quedar en la raíz del sitio junto a
+firebase-config.js, rankings-core.js, rankings.js y rankings.css.
+Las bibliotecas de Firebase se cargan para el ranking cuando hay conexión.
 La vista previa del HTML anterior no se actualiza por sí sola: abrí la versión nueva.
