@@ -1,11 +1,15 @@
 {
+ "auth": {
+  "providers": {"anonymous": true}
+ },
  "firestore": {
   "rules": "firestore.rules",
   "indexes": "firestore.indexes.json"
  },
  "hosting": {
-  "public": ".",
-  "ignore": ["firebase.json", "firestore.rules", "firestore.indexes.json", "**/.*", "**/node_modules/**", "**/*.zip", "**/*.md", "LEEME.txt", "tests/**"],
+  "public": "dist",
+  "predeploy": ["node scripts/build.cjs"],
+  "ignore": ["**/.*"],
   "headers": [{"source": "**/*.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}]
  }
 }

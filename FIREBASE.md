@@ -1,9 +1,12 @@
 # Ranking de Casting
 
-Estado de configuración: pendiente de renovar la sesión de Google/Firebase.
-Los intentos de creación desde Firebase console fallaron y la CLI informó que
-las credenciales locales vencieron. `firebase-config.js` permanece en `null`;
-por tanto, aún no hay envíos remotos ni un proyecto conectado confirmado.
+Proyecto conectado: `casting-gb-films` (Casting GB Films).
+App web: `1:788168190919:web:814c9872e041e88fcec7e2`.
+Juego publicado: <https://casting-gb-films.web.app/>.
+Cloud Firestore Standard `(default)` usa `southamerica-east1`, con nivel gratuito
+y protección de borrado activada. Authentication tiene habilitado Anónimo.
+Las reglas y el índice del ranking están publicados. La configuración pública
+está en `firebase-config.js`; `.firebaserc` selecciona este proyecto por defecto.
 
 ## Servicios
 
@@ -15,6 +18,8 @@ este flujo. El plan gratuito tiene cuotas; si se agotan, los envíos quedan pend
 
 ## Activación
 
+Los siguientes pasos ya se hicieron para Casting; sirven si se migra de proyecto.
+
 1. Crear un proyecto Firebase y registrar una app web llamada Casting.
 2. Copiar el objeto de configuración web a `firebase-config.js` en lugar de `null`.
    La configuración web es pública; nunca copiar credenciales de Firebase Admin.
@@ -22,20 +27,21 @@ este flujo. El plan gratuito tiene cuotas; si se agotan, los envíos quedan pend
 4. Crear Cloud Firestore Standard, base `(default)`, inicialmente en producción.
 5. Publicar `firestore.rules` y crear el índice de `firestore.indexes.json`.
 6. Publicar los cinco archivos del juego. Firebase Hosting queda preparado en
-   `firebase.json` y puede publicarse con la CLI si se desea usar ese alojamiento.
+   `firebase.json`. Antes de publicar, `scripts/build.cjs` prepara en `dist` solo
+   los cinco archivos del juego; no se publican código auxiliar, ZIP ni logs.
    Registrar el dominio del juego en los dominios autorizados de Authentication
    si el servicio lo solicita.
 
-Con la CLI de Firebase autenticada, reemplazar PROJECT_ID por el proyecto real:
+Con la CLI de Firebase autenticada, para volver a publicar configuración:
 
 ```powershell
-npx firebase-tools deploy --project PROJECT_ID --only firestore:rules,firestore:indexes
+npx firebase-tools deploy --project casting-gb-films --only firestore:rules,firestore:indexes,auth
 ```
 
 Para publicar también la web en Firebase Hosting:
 
 ```powershell
-npx firebase-tools deploy --project PROJECT_ID --only hosting
+npx firebase-tools deploy --project casting-gb-films --only hosting
 ```
 
 ## Registros y ranking
@@ -76,6 +82,15 @@ Ejecutar `node --test tests/rankings.test.cjs`. Con Firebase configurado,
 comprobar además una partida real: guardar un resultado, verificar su documento
 en Firestore y consultarlo desde otro navegador. Las pruebas locales no prueban
 permisos, cuotas o índices de un proyecto Firebase remoto.
+
+Verificación real completada: una partida guardada desde el navegador local
+apareció en el ranking global de la web publicada. `scripts/check-live.cjs`
+probó autenticación anónima, creación y lectura con fecha del servidor, rechazo
+de puntajes negativos, rechazo de modificación/borrado y límites de lectura.
+El script elimina únicamente el registro descartable que genera, usando la
+sesión administrativa local; no imprime ni guarda tokens. Para repetirlo, pasar
+la ruta `lib` de una instalación autenticada de la herramienta oficial Firebase.
+Los registros de prueba se retiraron del ranking al terminar la verificación.
 
 Documentación: [Configuración web](https://firebase.google.com/docs/web/setup),
 [autenticación anónima](https://firebase.google.com/docs/auth/web/anonymous-auth),
